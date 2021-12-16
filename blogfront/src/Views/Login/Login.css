@@ -1,0 +1,26 @@
+.Login__container {
+    width: 100vw;
+    height: 100vh;
+    background-color : #020324;
+}
+
+.Login__logo {
+    float: right;
+    width: 10%;
+}
+
+.Login__container__login {
+    background-color: aliceblue;
+    clear: both;
+    padding: 40px;
+    border-radius: 30px
+}
+
+.Login__container__login input {
+    border-radius: 10px;
+}
+
+.Login__container em {
+    color: white;
+}
+
