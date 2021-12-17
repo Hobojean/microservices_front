@@ -2,16 +2,26 @@
 import React, {Component, Fragment} from 'react';
 import "./Login.css";
 import logo from '../../Assets/logo.png';
+import axios from "axios";
 
 export default class Login extends Component {
     constructor(props) {
         super(props);
-        this.state = {email:'', password:''};
+        this.state = {email:'', password:'', user:[]};
 
         this.handleChangePassword = this.handleChangePassword.bind(this);
         this.handleChangeEmail = this.handleChangeEmail.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+    }
 
+    componentDidMount() {
+
+        axios.get('http://localhost:8000/user/all')
+            .then(res=> {
+                    const user = res.data;
+                    console.log(res)
+                }
+            )
     }
 
     handleChangeEmail(event)
@@ -22,6 +32,15 @@ export default class Login extends Component {
     handleChangePassword(event)
     {
         this.setState({password: event.target.value})
+    }
+
+    handleSubmit(event){
+        if(this.state.password !== '' && this.state.email !== '') {
+            alert('coucou')
+        } else {
+            alert('Les champs ne peuvent pas être vides!')
+        }
+        event.preventDefault();
     }
 
     render() {
@@ -43,14 +62,9 @@ export default class Login extends Component {
                                 <label htmlFor="exampleInputPassword1" className="form-label">Password</label>
                                 <input type="password" className="form-control" id="exampleInputPassword1" value={this.state.password} onChange={this.handleChangePassword}/>
                             </div>
-                            <div className="mb-3 form-check">
-                                <input type="checkbox" className="form-check-input" id="exampleCheck1"/>
-                                <label className="form-check-label" htmlFor="exampleCheck1">Check me out</label>
-                            </div>
                             <input type="submit" value="Submit" className="btn btn-primary"/>
                         </form>
                     </div>
-                    <em>Copyright Marie LE DU 2021</em>
                 </div>
             </Fragment>
         )
